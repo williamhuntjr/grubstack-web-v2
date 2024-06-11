@@ -1,0 +1,1 @@
+export const cls = (...classes: (string | false | undefined)[]): string => classes.filter(Boolean).join(' ')

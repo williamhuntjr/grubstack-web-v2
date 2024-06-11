@@ -1,0 +1,13 @@
+@import 'assets/sass/variables';
+
+.appContainer {
+  width: 100%;
+  padding-top: $header-height;
+  @media screen and (max-width: $bp-sm) {
+    padding-top: $header-tablet-height;
+  }
+  @media screen and (max-width: $bp-xs) {
+    padding-bottom: $mobile-nav-height;
+    padding-top: $header-height;
+  }
+}

@@ -1,0 +1,36 @@
+@import 'assets/sass/variables';
+
+$dialogActionButtonWidth: $minButtonWidth;
+
+.dialogContent {
+  padding: $grid-large !important;
+}
+.dialogActions {
+  padding: $grid-base $grid-large $grid-large $grid-large;
+}
+.dialogActionButton {
+  margin-right: $grid-small;
+  min-width: $dialogActionButtonWidth;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.dialogTitle {
+  background-color: $color-secondary;
+  color: $color-white;
+}
+.dialogTitleActions {
+  margin-left: auto;
+}
+.dialogTitleContent {
+  display: flex;
+}
+.dialogTitleText {
+  display: flex;
+  align-items: center;
+  margin-right: $grid-base;
+}
+.grubDialogContainer {
+  display: flex;
+  height: 100%;
+}

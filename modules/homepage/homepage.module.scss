@@ -1,0 +1,36 @@
+@import 'assets/sass/variables';
+
+.homepage {
+  .bannerImage {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - #{$header-height});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: flex-end;
+    justify-content: center;
+    @media screen and (max-width: $bp-sm) {
+      min-height: calc(100vh - #{$header-tablet-height});
+    }
+    @media screen and (max-width: $bp-xs) {
+      min-height: calc(100vh - #{$header-height});
+    }
+    .buttonContainer {
+      margin-bottom: $grid-giant;
+      @media screen and (max-width: $bp-md) {
+        margin-bottom: $grid-large;
+      }
+      button {
+        font-weight: bold;
+        font-family: var(--font-oswald);
+        font-size: 40px;
+        padding: $grid-tiny $grid-large $grid-tiny $grid-large;
+        border-radius: 40px;
+        @media screen and (max-width: $bp-md) {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}

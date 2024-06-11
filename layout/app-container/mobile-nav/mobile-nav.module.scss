@@ -1,0 +1,36 @@
+@import 'assets/sass/variables';
+
+.mobileNavBar {
+  display: none !important;
+  height: $mobile-nav-height;
+  background-color: $color-white !important;
+  box-shadow: $box-shadow;
+  border-top: $border-disabled;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: $bp-xs) {
+    display: flex !important;
+  }
+  .mobileNavToolbar {
+    justify-content: center;
+    padding: $grid-small;
+    .mobileNavButton {
+      display: flex;
+      flex-direction: column;
+      color: $color-black;
+      font-family: var(--font-bebas-neue);
+      margin-top: auto;
+      border-radius: unset !important;
+      margin: $grid-tiny;
+      .navIcon {
+        color: $color-black;
+        font-size: 30px;
+      }
+      .badge {
+        .cartIcon {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}

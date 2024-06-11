@@ -1,0 +1,18 @@
+@import 'assets/sass/variables';
+
+$locationFormWidth: 600px;
+
+.locationForm {
+  width: $locationFormWidth;
+  .divider {
+    width: 100%;
+    margin-bottom: $grid-base;
+  }
+  .buttonContainer {
+    width: 100%;
+    .selectButton {
+      display: flex;
+      margin-left: auto;
+    }
+  }
+}

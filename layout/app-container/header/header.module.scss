@@ -1,0 +1,128 @@
+@import 'assets/sass/variables';
+$searchInputWidth: 720px;
+$searchInputHeight: 50px;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  height: $header-height;
+  background-color: $color-white;
+  box-shadow: $box-shadow;
+  border-bottom: $border-disabled;
+  z-index: 999;
+  @media screen and (max-width: $bp-sm) {
+    height: $header-tablet-height;
+  }
+  @media screen and (max-width: $bp-xs) {
+    height: $header-height;
+  }
+  .headerContent {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    max-width: $container-width;
+    @media screen and (max-width: $bp-sm) {
+      flex-direction: column;
+    }
+    @media screen and (max-width: $bp-xs) {
+      flex-direction: row;
+    }
+    .logo {
+      margin: 0 $grid-base 0 $grid-base;
+      img {
+        min-width: 80px;
+        width: 100%;
+        max-height: $header-height;
+      }
+    }
+    .divider { 
+      width: 100%;
+      margin-bottom: $grid-base;
+      margin-top: 0 !important;
+      display: none;
+      @media screen and (max-width: $bp-sm) {
+        display: unset;
+      }
+      @media screen and (max-width: $bp-xs) {
+        display: none;
+      }
+    }
+    .searchField {
+      display: flex;
+      margin: 0 auto 0 auto;
+      width: 100%;
+      max-width: $searchInputWidth;
+      @media screen and (max-width: $bp-sm) {
+        display: none;
+      }
+      @media screen and (max-width: $bp-xs) {
+        display: none;
+      }
+      .searchIcon {
+        font-size: 30px;
+        margin: 0 $grid-small 0 $grid-small;
+      }
+      .searchInput {
+        width: 100%;
+        background-color: #fff;
+        border-radius: 25px;
+        font-size: 18px;
+        padding: $grid-tiny $grid-base $grid-tiny $grid-base;
+        height: $searchInputHeight;
+        margin-right: $grid-base;
+        input::placeholder {
+          text-transform: uppercase;
+          font-weight: bold;
+          font-family: sans-serif, 'Open Sans';
+          color: #000;
+          opacity: 0.7;
+          font-size: 18px;
+        }
+      }
+    }
+    .navLinks {
+      justify-content: right;
+      display: flex;
+      margin: 0 $grid-base 0 $grid-base;
+      min-width: 285px;
+      @media screen and (max-width: $bp-xs) {
+        margin-left: auto;
+        min-width: unset;
+        .searchLink, .menuLink, .popularLink, .locationsLink {
+          display: none !important;
+        }
+        .cartLink {
+          margin-top: $grid-small !important;
+        }
+      }
+      .iconLink {
+        margin-top: auto;
+        margin-right: $grid-large;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 18px;
+        color: $color-black;
+        font-family: var(--font-bebas-neue);
+        &:last-child { margin-right: 0; }
+        &:visited {
+          color: $color-black;
+        }
+        .icon {
+          margin-bottom: $grid-tiny;
+          font-size: 32px;
+        }
+      }
+      .searchLink {
+        display: none;
+        @media screen and (max-width: $bp-sm) {
+          display: flex;
+        }
+      }
+    }
+  }
+}
