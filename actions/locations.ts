@@ -8,9 +8,9 @@ import { ILocation } from 'common/types'
 
 const LocationCookie = 'store-location'
 
-export async function getAllLocations(): Promise<ILocation[]> {
+export async function getAllLocations() {
   const resp = await callApi('/locations', ApiMethod.GET)
-  return (resp.data as ILocation[]) ?? []
+  return resp ? (resp.data as ILocation[]) : null
 }
 
 export async function getLocation(locationId: number) {
@@ -33,6 +33,6 @@ export async function getCurrentLocation() {
     const cookie = cookies().get(LocationCookie)
     return JSON.parse(cookie?.value ?? '')
   } else {
-    return undefined
+    return null
   }
 }

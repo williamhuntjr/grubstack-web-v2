@@ -9,3 +9,5 @@ export async function GET() {
     return NextResponse.json({ data: null, status: { code: 'success' }}, { status: 200 })
   }
 }
+
+export const dynamic = 'force-dynamic'

@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 
 import { getLocation, setCurrentLocation } from 'actions/locations'
 
-export async function POST(request: Request) {
-  const json = await request.json()
+export async function POST(req: Request) {
+  const json = await req.json()
   if (json.locationId) {
     const data = await getLocation(Number(json.locationId))
     if (data) {
