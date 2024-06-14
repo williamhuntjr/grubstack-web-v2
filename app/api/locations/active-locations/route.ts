@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
-import { getAllLocations } from 'common/actions/locations'
+import { getActiveLocations } from 'common/actions/locations'
 
 export async function GET() {
-  const resp = await getAllLocations()
+  const resp = await getActiveLocations()
   return NextResponse.json(resp)
 }
 

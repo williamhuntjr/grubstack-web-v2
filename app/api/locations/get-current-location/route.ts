@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getCurrentLocation } from "actions/locations"
+import { getCurrentLocation } from "common/actions/locations"
 
 export async function GET() {
   const location = await getCurrentLocation()

@@ -13,6 +13,11 @@ export async function getAllLocations() {
   return resp ? (resp.data as ILocation[]) : null
 }
 
+export async function getActiveLocations() {
+  const resp = await callApi('/locations?isActive=true', ApiMethod.GET)
+  return resp ? (resp.data as ILocation[]) : null
+}
+
 export async function getLocation(locationId: number) {
   const resp = await callApi(`/locations/${locationId}`, ApiMethod.GET)
   return resp ? (resp.data as ILocation) : null

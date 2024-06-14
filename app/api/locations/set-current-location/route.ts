@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { getLocation, setCurrentLocation } from 'actions/locations'
+import { getLocation, setCurrentLocation } from 'common/actions/locations'
 
 export async function POST(req: Request) {
   const json = await req.json()

@@ -20,7 +20,7 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
   };
 
   const init = async() => {
-    const resp = await fetch('/api/locations')
+    const resp = await fetch('/api/locations/active-locations')
     const data = await resp.json()
     setLocations(data ?? [])
     if (location) { setCurrentLocation(location.id!) }
@@ -31,6 +31,7 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
       onSelect(currentLocation)
     }
   }
+
   useEffect(() => void init(), [])
 
   return (
