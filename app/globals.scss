@@ -1,22 +1,33 @@
 @import 'assets/sass/variables';
 
+html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 16px;
-  color: #282828;
+  background-color: $background-color;
+  color: $black-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $background-color;
 }
-h1 { font-size: $font-size-h1; }
-h2 { font-size: $font-size-h2; }
-h3 { font-size: $font-size-h3; }
-h4 { font-size: $font-size-h4; }
-h5 { font-size: $font-size-h5; }
-h6 { font-size: $font-size-h6; }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 $grid-base 0;
+  letter-spacing: 1px;
+  @media screen and (max-width: $bp-md) {
+    margin: 0 0 $grid-small 0;
+  }
+  @media screen and (max-width: $bp-xs) {
+    margin: 0 0 $grid-tiny 0;
+  }
+}
+h1, h2 { font-weight: bold; }
+h3, h4, h5 { font-weight: 500; }
 h1 {
   font-size: $font-size-h1;
   line-height: calc(#{$font-size-h1} + 10px);
@@ -40,17 +51,33 @@ h2 {
     line-height: calc(#{$font-size-h2} - 10px + 10px);
   }
 }
-h1, h2, h3, h4, h5, h6 {
-  margin: $grid-base 0 $grid-tiny 0;
-  font-family: 'Oswald', sans-serif;
+h3 {
+  font-size: $font-size-h3;
+}
+h4 {
+  font-size: $font-size-h4;
+}
+h5 {
+  font-size: $font-size-h5;
+}
+h6 {
+  font-size: $font-size-h6;
 }
 p {
-  font-size: 20px;
+  font-size: $font-size-p;
   line-height: 30px;
-  font-weight: 300;
+  margin: 0 0 $grid-base 0;
+  @media screen and (max-width: $bp-sm) {
+    font-size: calc(#{$font-size-p} - 2px);
+    line-height: calc(#{$font-size-p} - 2px + 10px);
+  }
+  @media screen and (max-width: $bp-xs) {
+    font-size: calc(#{$font-size-p} - 4px);
+    line-height: calc(#{$font-size-p} - 4px + 10px);
+  }
 }
 .MuiDivider-root {
-  border-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.2) !important;
   margin-top: $grid-base !important;
   margin-bottom: $grid-base !important;
 }
