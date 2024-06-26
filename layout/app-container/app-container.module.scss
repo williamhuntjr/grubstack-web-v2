@@ -1,12 +1,17 @@
 @import 'assets/sass/variables';
+@import 'assets/sass/application';
 
 .appContainer {
   width: 100%;
   padding-top: $header-height;
+  min-height: calc(100vh - #{$header-height});
+  background-color: $background-color;
   @media screen and (max-width: $bp-sm) {
+    min-height: calc(100vh - #{$header-tablet-height});
     padding-top: $header-tablet-height;
   }
   @media screen and (max-width: $bp-xs) {
+    min-height: calc(100vh - #{$header-height});
     padding-bottom: $mobile-nav-height;
     padding-top: $header-height;
   }
