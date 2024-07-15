@@ -1,0 +1,25 @@
+@import 'assets/sass/variables';
+@import 'assets/sass/application';
+
+.footerContainer {
+  display: flex;
+  height: $footer-height;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--footer-background-color);
+
+  p { 
+    margin-bottom: 0;
+    color: var(--footer-foreground-color);
+  }
+
+  .siteLink {
+    color: var(--footer-foreground-color);
+    text-decoration: none;
+    font-weight: 500;
+    &:visited {
+      color: var(--footer-foreground-color);
+      text-decoration: none;
+    }
+  }
+}

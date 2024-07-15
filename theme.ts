@@ -1,30 +1,23 @@
 'use client'
 
-import { Roboto } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import { createTheme } from '@mui/material/styles'
 
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
+const open_sans = Open_Sans({
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
 })
 
-const theme = createTheme({
+const defaultTheme = createTheme({
   palette: {
     primary: {
-      light: '#4e8ce1',
       main: '#4e8ce1',
-      dark: '#4e8ce1',
+      contrastText: '#fff'
     },
     secondary: {
-      light: '#111',
       main: '#111',
-      dark: '#111',
-    },
-    info: {
-      light: '#4e8ce1',
-      main: '#4e8ce1',
-      dark: '#4e8ce1',
+      contrastText: '#fff'
     },
   },
   typography: {
@@ -33,13 +26,12 @@ const theme = createTheme({
       textTransform: 'none',
       fontWeight: 500,
     },
-    fontFamily: roboto.style.fontFamily,
+    fontFamily: open_sans.style.fontFamily,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 0,
           textTransform: 'none',
         },
         contained: {
@@ -94,4 +86,4 @@ const theme = createTheme({
   },
 })
 
-export default theme
+export default defaultTheme

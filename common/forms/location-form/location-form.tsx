@@ -7,11 +7,13 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Divider from '@mui/material/Divider'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { Loading } from 'common/components/loading/loading'
 import { ILocation } from 'common/types'
 import { ILocationForm } from './location-form.types'
 import styles from './location-form.module.scss'
 
 export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
+  const [isLoading, setLoading] = useState<boolean>(false)
   const [currentLocation, setCurrentLocation] = useState<string>('')
   const [locations, setLocations] = useState<ILocation[]>([])
 
@@ -20,10 +22,12 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
   };
 
   const init = async() => {
+    setLoading(true)
     const resp = await fetch('/api/locations/active-locations')
     const data = await resp.json()
     setLocations(data ?? [])
     if (location) { setCurrentLocation(location.id!) }
+    setLoading(false)
   }
 
   const handleSelect = () => {
@@ -35,6 +39,9 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
   useEffect(() => void init(), [])
 
   return (
+    <>
+    {isLoading && <Loading />}
+    {!isLoading &&
     <div className={styles.locationForm}>
       <FormControl fullWidth>
         <InputLabel id="location-select-label">Store Location</InputLabel>
@@ -55,5 +62,7 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
         <Button variant="contained" color="secondary" size="large" className={styles.selectButton} onClick={handleSelect}>Select Location</Button>
       </div>
     </div>
+    }
+    </>
   )
 }

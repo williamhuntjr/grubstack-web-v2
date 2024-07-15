@@ -21,7 +21,6 @@ $transparent-bg: transparent !default;
 $dark-gray: #9a9a9a !default;
 $light-gray: #e5e5e5 !default;
 $light-color: #eaeaea !default;
-$background-color: $light-color;
 
 $font-size-h1: 42px !default;
 $font-size-h2: 34px !default;
@@ -31,11 +30,8 @@ $font-size-h5: 16px !default;
 $font-size-h6: 12px !default;
 $font-size-p: 16px !default;
 
-$color-primary: #4e8ce1 !default;
-$color-secondary: #222 !default;
-$color-info: #4e8ce1;
-$color-production: #d62b70;
-$color-alert: #e44646;
+$color-primary: var(---primary-color) !default;
+$color-secondary: var(--secondary-color) !default;
 
 $color-gray-primary: #adaeb0 !default;
 $color-gray-normal: #dadada !default;

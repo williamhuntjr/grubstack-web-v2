@@ -4,6 +4,9 @@ $locationFormWidth: 600px;
 
 .locationForm {
   width: $locationFormWidth;
+  @media screen and (max-width: $bp-md) {
+    width: 100%;
+  }
   .divider {
     width: 100%;
     margin-bottom: $grid-base;

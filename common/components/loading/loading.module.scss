@@ -1,0 +1,12 @@
+@import 'assets/sass/variables';
+
+.loadingContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loadingContent {
+  padding: $grid-base;
+}

@@ -1,5 +1,6 @@
-import { IMenu } from 'common/types'
+import { IItem, IMenu } from 'common/types'
 
 export interface IMenus {
   data: IMenu[]
+  featuredItem: IItem
 }

@@ -11,7 +11,7 @@ $searchInputHeight: 50px;
   width: 100%;
   position: fixed;
   height: $header-height;
-  background-color: $color-white;
+  background-color: var(--header-background-color);
   box-shadow: $box-shadow;
   border-bottom: $border-disabled;
   z-index: 999;
@@ -33,7 +33,7 @@ $searchInputHeight: 50px;
       flex-direction: row;
     }
     .logo {
-      margin: 0 $grid-base 0 $grid-base;
+      margin: 0 $grid-large 0 $grid-large;
       img {
         min-width: 80px;
         width: 100%;
@@ -108,11 +108,11 @@ $searchInputHeight: 50px;
         flex-direction: column;
         align-items: center;
         font-size: 18px;
-        color: $color-black;
+        color: var(--header-foreground-color);
         font-family: var(--font-bebas-neue);
         &:last-child { margin-right: 0; }
         &:visited {
-          color: $color-black;
+          color: var(--header-foreground-color);
         }
         .icon {
           margin-bottom: $grid-tiny;

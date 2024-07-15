@@ -59,3 +59,9 @@ export interface ILocation {
   menus?: IMenu[]
   is_active: boolean
 }
+
+export interface IProperty {
+  id: string
+  key: string
+  value: string
+}

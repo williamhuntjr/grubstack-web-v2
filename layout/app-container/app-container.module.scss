@@ -3,8 +3,11 @@
 
 .appContainer {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   padding-top: $header-height;
-  min-height: calc(100vh - #{$header-height});
+  min-height: calc(100vh - #{$header-height} - #{$footer-height});
   background-color: $background-color;
   @media screen and (max-width: $bp-sm) {
     min-height: calc(100vh - #{$header-tablet-height});
@@ -14,5 +17,16 @@
     min-height: calc(100vh - #{$header-height});
     padding-bottom: $mobile-nav-height;
     padding-top: $header-height;
+  }
+}
+
+.loadingContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin: 0;
   }
 }

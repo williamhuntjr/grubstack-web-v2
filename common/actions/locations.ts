@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 
 import { callApi } from 'common/api'
 import { ApiMethod } from 'common/constants'
-import { ILocation, IMenu } from 'common/types'
+import { ILocation, IMenu, IProperty } from 'common/types'
 
 const LocationCookie = 'store-location'
 
@@ -45,4 +45,14 @@ export async function getCurrentLocation() {
 export async function getLocationMenus(locationId: string) {
   const resp = await callApi(`/locations/${locationId}/menus`, ApiMethod.GET)
   return resp ? (resp.data as IMenu[]) : []
+}
+
+export async function getLocationProperties(locationId: string) {
+  const resp = await callApi(`/locations/${locationId}/properties`, ApiMethod.GET)
+  return resp ? (resp.data as IProperty) : null
+}
+
+export async function getLocationProperty(locationId: string, key: string) {
+  const resp = await callApi(`/locations/${locationId}/properties/${key}`, ApiMethod.GET)
+  return resp ? (resp.data as IProperty) : null
 }

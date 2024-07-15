@@ -16,8 +16,8 @@ $dialogActionButtonWidth: $min-button-width;
   }
 }
 .dialogTitle {
-  background-color: $color-secondary;
-  color: $color-white;
+  background-color: var(--primary-color) !important;
+  color: var(--primary-color-contrast) !important;
 }
 .dialogTitleActions {
   margin-left: auto;
