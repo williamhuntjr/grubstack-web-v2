@@ -1,0 +1,51 @@
+@import 'assets/sass/variables';
+
+.itemDetailsContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  .itemDetailsContent {
+    max-width: 600px;
+    padding: $grid-base $grid-large $grid-base $grid-large;
+    .itemName,
+    .itemDescription {
+      text-align: center;
+    }
+    .itemName {
+      @media screen and (max-width: $bp-sm) {
+        font-size: 32px;
+        line-height: 40px;
+      }
+    }
+    .quantity {
+      display: flex;
+      justify-content: center;
+    }
+    .thumbnailUrl {
+      width: 100%;
+      max-width: 200px;
+      display: block;
+      margin: auto;
+    }
+    .buttonContainer {
+      display: flex;
+      justify-content: center;
+      margin-top: $grid-large;
+    }
+  }
+  .warningContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: $grid-giant;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      margin-bottom: $grid-tiny;
+    }
+  }
+}
