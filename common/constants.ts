@@ -22,7 +22,7 @@ export enum RestaurantProperty {
   'SecondaryColor' = 'secondary_color',
   'SecondaryColorContrast' = 'secondary_color_contrast',
   'HeaderBackgroundColor' = 'header_background_color',
-  'HeaderForegroundColor' = 'header_foreground_color',  
+  'HeaderForegroundColor' = 'header_foreground_color',
   'FooterBackgroundColor' = 'footer_background_color',
   'FooterForegroundColor' = 'footer_foreground_color',
   'TextColor' = 'text_color',

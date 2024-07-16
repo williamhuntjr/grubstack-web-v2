@@ -42,11 +42,19 @@ h6 {
     margin: 0 0 $grid-tiny 0;
   }
 }
-h1, h2 { font-weight: bold; }
-h3, h4, h5 { font-weight: 500; }
+h1,
+h2 {
+  font-weight: bold;
+}
+h3,
+h4,
+h5 {
+  font-weight: 500;
+}
 h1 {
   font-size: $font-size-h1;
   line-height: calc(#{$font-size-h1} + 10px);
+  letter-spacing: 1px;
   @media screen and (max-width: $bp-md) {
     font-size: calc(#{$font-size-h1} - 5px);
     line-height: calc(#{$font-size-h1} - 5px + 10px);
@@ -85,7 +93,7 @@ h6 {
 }
 p {
   font-size: $font-size-p;
-  line-height: 30px;
+  line-height: 28px;
   margin: 0 0 $grid-base 0;
   @media screen and (max-width: $bp-sm) {
     font-size: calc(#{$font-size-p} - 2px);
@@ -97,7 +105,8 @@ p {
   margin-top: $grid-base !important;
   margin-bottom: $grid-base !important;
 }
-.MuiInputBase-root.MuiInput-root::before, .MuiInputBase-root.MuiInput-root::after {
+.MuiInputBase-root.MuiInput-root::before,
+.MuiInputBase-root.MuiInput-root::after {
   border-bottom: none !important;
 }
 .MuiInput-root.MuiInput-underline {

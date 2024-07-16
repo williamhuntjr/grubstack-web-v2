@@ -49,7 +49,7 @@ export async function getLocationMenus(locationId: string) {
 
 export async function getLocationProperties(locationId: string) {
   const resp = await callApi(`/locations/${locationId}/properties`, ApiMethod.GET)
-  return resp ? (resp.data as IProperty) : null
+  return resp ? (resp.data as IProperty[]) : null
 }
 
 export async function getLocationProperty(locationId: string, key: string) {

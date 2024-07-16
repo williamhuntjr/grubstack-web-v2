@@ -1,4 +1,4 @@
-import { ILocation } from "common/types"
+import { ILocation } from 'common/types'
 
 export interface ILocationForm {
   onSelect(id: string): void

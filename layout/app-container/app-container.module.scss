@@ -10,12 +10,12 @@
   min-height: calc(100vh - #{$header-height} - #{$footer-height});
   background-color: $background-color;
   @media screen and (max-width: $bp-sm) {
-    min-height: calc(100vh - #{$header-tablet-height});
+    min-height: calc(100vh - #{$header-tablet-height} - #{$footer-height});
     padding-top: $header-tablet-height;
   }
   @media screen and (max-width: $bp-xs) {
-    min-height: calc(100vh - #{$header-height});
-    padding-bottom: $mobile-nav-height;
+    min-height: calc(100vh - #{$header-height} - #{$mobile-nav-height} - #{$footer-height});
+    padding-bottom: calc(#{$mobile-nav-height} + #{$footer-height});
     padding-top: $header-height;
   }
 }
@@ -27,6 +27,33 @@
   align-items: center;
   justify-content: center;
   h1 {
-    margin: 0;
+    margin: 0 auto 0 auto;
+    width: 160px;
+    @media screen and (max-width: $bp-xs) {
+      width: 100px;
+    }
+  }
+  .loading::after {
+    display: inline-block;
+    animation: dotty steps(1, end) 1.25s infinite;
+    content: '';
+  }
+
+  @keyframes dotty {
+    0% {
+      content: '';
+    }
+    25% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    75% {
+      content: '...';
+    }
+    100% {
+      content: '';
+    }
   }
 }

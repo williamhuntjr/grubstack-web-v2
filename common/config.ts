@@ -11,5 +11,5 @@ export const appConfig: IGlobalConstants = {
   accessToken: process.env.ACCESS_TOKEN || 'abcd1234',
   siteUrl: process.env.SITE_URL || 'http://localhost:3003',
   tenantId: process.env.TENANT_ID || 'some-tenant-id',
-  productionUrl: process.env.PRODUCTION_URL || 'http://local.grubstack.app'
+  productionUrl: process.env.PRODUCTION_URL || 'http://local.grubstack.app',
 }

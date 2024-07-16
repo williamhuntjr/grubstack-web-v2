@@ -3,5 +3,5 @@ export interface IGrubDialog {
   open: boolean
   className?: string
   onClose(): void
-  children: React.ReactElement|React.ReactNode
+  children: React.ReactElement | React.ReactNode
 }

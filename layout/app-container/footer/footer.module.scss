@@ -7,12 +7,15 @@
   align-items: center;
   justify-content: center;
   background-color: var(--footer-background-color);
-
-  p { 
+  @media screen and (max-width: $bp-xs) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  p {
     margin-bottom: 0;
     color: var(--footer-foreground-color);
   }
-
   .siteLink {
     color: var(--footer-foreground-color);
     text-decoration: none;

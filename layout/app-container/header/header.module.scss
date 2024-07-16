@@ -40,7 +40,7 @@ $searchInputHeight: 50px;
         max-height: $header-height;
       }
     }
-    .divider { 
+    .divider {
       width: 100%;
       margin-bottom: $grid-base;
       margin-top: 0 !important;
@@ -93,7 +93,10 @@ $searchInputHeight: 50px;
       @media screen and (max-width: $bp-xs) {
         margin-left: auto;
         min-width: unset;
-        .searchLink, .menuLink, .popularLink, .locationsLink {
+        .searchLink,
+        .menuLink,
+        .popularLink,
+        .locationsLink {
           display: none !important;
         }
         .cartLink {
@@ -110,7 +113,9 @@ $searchInputHeight: 50px;
         font-size: 18px;
         color: var(--header-foreground-color);
         font-family: var(--font-bebas-neue);
-        &:last-child { margin-right: 0; }
+        &:last-child {
+          margin-right: 0;
+        }
         &:visited {
           color: var(--header-foreground-color);
         }

@@ -31,17 +31,21 @@ export interface IItem {
   name: string
   description: string
   thumbnail_url: string
+  slug: string
   varieties?: IVariety[]
   ingredients?: IIngredient[]
   price?: number
   sale_price?: number
   is_onsale?: boolean
+  menu_id?: string
+  menu_slug?: string
 }
 
 export interface IMenu {
   id?: string
   name: string
   description: string
+  slug: string
   thumbnail_url: string
   items?: IItem[]
 }

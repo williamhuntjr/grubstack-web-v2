@@ -7,7 +7,7 @@ export const Loading: FC = () => {
     <div className={styles.loadingContainer}>
       <div className={styles.loadingContent}>
         <h3>Loading...</h3>
-        <LinearProgress color="info" />
+        <LinearProgress color="primary" />
       </div>
     </div>
   )

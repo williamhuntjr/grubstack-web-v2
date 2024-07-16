@@ -28,7 +28,7 @@ export function generateTheme(properties: IProperty[]) {
         main: secondaryColor,
         light: secondaryColor,
         dark: secondaryColor,
-        contrastText: secondaryColorContrast
+        contrastText: secondaryColorContrast,
       },
     },
     typography: {

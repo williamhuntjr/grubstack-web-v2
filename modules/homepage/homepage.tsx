@@ -1,21 +1,25 @@
 'use client'
 
+import { FC } from 'react'
 import { Oswald } from 'next/font/google'
 import Button from '@mui/material/Button'
 import { useMediaQuery } from '@mui/material'
 import { smMq } from 'common/constants'
 import { cls } from 'common/utils/utils'
+import { getProperty } from 'common/utils/utils'
+import { IHomepage } from './homepage.types'
 import styles from './homepage.module.scss'
 
 const oswald = Oswald({
   variable: '--font-oswald',
   subsets: ['latin'],
-  weight: ["400", "700"]
+  weight: ['400', '700'],
 })
 
-export const Homepage = () => {
-  const bannerProductImg = 'https://cdn.grubstack.app/9fa974f0-b13d-46ba-9a9e-227cb3c218f7/burger-banner-2-06_05_2024_13:49:43.jpg'
-  const bannerProductMobileImg = 'https://cdn.grubstack.app/9fa974f0-b13d-46ba-9a9e-227cb3c218f7/burger-banner-2-06_05_2024_13:49:43.jpg'
+export const Homepage: FC<IHomepage> = ({ properties }) => {
+  const bannerProductImg = getProperty(properties, 'banner_image_url') ?? 'https://cdn.grubstack.app/img/home-banner-image.jpg'
+  const bannerProductMobileImg =
+    getProperty(properties, 'mobile_banner_image_url') ?? 'https://cdn.grubstack.app/img/mobile-home-banner-image.jpg'
 
   const bannerProductUrl = 'http://localhost:3001'
 
@@ -24,12 +28,17 @@ export const Homepage = () => {
 
   return (
     <div className={cls(styles.homepage, oswald.variable)}>
-      <div className={styles.bannerImage} style={{  
-          backgroundImage: "url(" + bannerImg + ")",
-        }}>
-          <div className={styles.buttonContainer}>
-            <Button color="secondary" variant="contained" onClick={() => window.location.href = bannerProductUrl}>Order Now</Button>
-          </div>
+      <div
+        className={styles.bannerImage}
+        style={{
+          backgroundImage: 'url(' + bannerImg + ')',
+        }}
+      >
+        <div className={styles.buttonContainer}>
+          <Button color="secondary" variant="contained" onClick={() => (window.location.href = bannerProductUrl)}>
+            Order Now
+          </Button>
+        </div>
       </div>
     </div>
   )

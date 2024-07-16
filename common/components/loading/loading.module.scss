@@ -9,4 +9,7 @@
 }
 .loadingContent {
   padding: $grid-base;
+  h3 {
+    margin-bottom: $grid-tiny;
+  }
 }

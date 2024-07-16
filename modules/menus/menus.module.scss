@@ -6,6 +6,10 @@
   flex-direction: column;
   padding: $grid-giant $grid-large $grid-base $grid-large;
   margin-top: $grid-base;
+  @media screen and (max-width: $bp-xs) {
+    padding: 0;
+    margin-top: $grid-large;
+  }
   .featuredItem {
     width: 100%;
     margin: 0 auto 0 auto;
@@ -25,6 +29,9 @@
       @media screen and (max-width: $bp-sm) {
         flex-direction: column;
       }
+      @media screen and (max-width: $bp-xs) {
+        padding: $grid-large;
+      }
       .itemDetails {
         display: flex;
         flex-direction: column;
@@ -34,6 +41,14 @@
         }
         h3 {
           margin: 0;
+        }
+        .buttonContainer {
+          button {
+            margin-right: $grid-small !important;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
         }
       }
       .itemThumbnail {
@@ -54,84 +69,10 @@
   }
 }
 
-.menusContainer {
-  width: 100%;
-  max-width: $container-width;
-  margin: $grid-base auto 0 auto;
-  padding: 0;
-  h1 {
-    margin: 0 0 0 $grid-large;
-    @media screen and (max-width: $bp-sm) {
-      text-align: center;
-      margin: 0;
-    }
-  }
-  .menusInfo {
-    display: flex;
-    width: 100%;
-    max-width: $container-width;
-    margin: $grid-base auto 0 auto;
+.menusList {
+  padding: 0 $grid-large 0 $grid-large;
+  @media screen and (max-width: $bp-xs) {
     padding: 0;
-    p {
-      font-family: var(--font-open-sans);
-    }
-    h1, h3 {
-      font-family: var(--font-bebas-neue);
-      margin-bottom: 0;
-    }
-    .listContainer {
-      display: inline-flex;
-      width: 100%;
-      margin: 0;
-      padding: $grid-tiny $grid-base $grid-base $grid-base;
-      flex-wrap: wrap;
-      li {
-        display: flex;
-        width: 16.66%;
-        margin: 0;
-        list-style-type: none;
-        justify-content: center;
-        @media screen and (max-width: $bp-md) {
-          width: 24.95%;
-        }
-        @media screen and (max-width: $bp-sm) {
-          width: 49.95%;
-        }
-        .cardContainer {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          margin: 0 $grid-small $grid-base $grid-small;
-          width: 100%;
-          padding: $grid-base;
-          text-align: center;
-          border: solid 2px $background-color;
-          border-radius: 10px;
-          &:hover {
-            border: solid 2px rgba(0,0,0,0.15);
-            cursor: pointer;
-            background-color: $color-white;
-          }
-          img {
-            width: 100%;
-            max-width: 200px;
-          }
-          .menuDetails {
-            margin-top: auto;
-            height: 100%;
-            max-height: 110px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-          }
-          .buttonContainer {
-            margin-bottom: $grid-base;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -146,7 +87,8 @@
     font-family: var(--font-open-sans);
     margin-bottom: 0;
   }
-  h1, h3 {
+  h1,
+  h3 {
     font-family: var(--font-bebas-neue);
     margin-bottom: 0;
   }

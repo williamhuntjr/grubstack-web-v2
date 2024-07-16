@@ -18,15 +18,17 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
   const [locations, setLocations] = useState<ILocation[]>([])
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCurrentLocation(event.target.value as string);
-  };
+    setCurrentLocation(event.target.value as string)
+  }
 
-  const init = async() => {
+  const init = async () => {
     setLoading(true)
     const resp = await fetch('/api/locations/active-locations')
     const data = await resp.json()
     setLocations(data ?? [])
-    if (location) { setCurrentLocation(location.id!) }
+    if (location) {
+      setCurrentLocation(location.id!)
+    }
     setLoading(false)
   }
 
@@ -40,29 +42,27 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
 
   return (
     <>
-    {isLoading && <Loading />}
-    {!isLoading &&
-    <div className={styles.locationForm}>
-      <FormControl fullWidth>
-        <InputLabel id="location-select-label">Store Location</InputLabel>
-        <Select
-          labelId="location-select-label"
-          id="location-select"
-          value={currentLocation}
-          label="Location"
-          onChange={handleChange}
-        >
-          {locations.map((location) =>
-            <MenuItem value={location.id} key={`location-${location.id}`}>{location.name} - {location.address1}, {location.city} {location.state}, {location.postal}</MenuItem>
-          )}
-        </Select>
-      </FormControl>
-      <Divider />
-      <div className={styles.buttonContainer}>
-        <Button variant="contained" color="secondary" size="large" className={styles.selectButton} onClick={handleSelect}>Select Location</Button>
-      </div>
-    </div>
-    }
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <div className={styles.locationForm}>
+          <FormControl fullWidth>
+            <InputLabel id="location-select-label">Store Location</InputLabel>
+            <Select labelId="location-select-label" id="location-select" value={currentLocation} label="Location" onChange={handleChange}>
+              {locations.map((location) => (
+                <MenuItem value={location.id} key={`location-${location.id}`}>
+                  {location.name} - {location.address1}, {location.city} {location.state}, {location.postal}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Divider />
+          <div className={styles.buttonContainer}>
+            <Button variant="contained" color="secondary" size="large" className={styles.selectButton} onClick={handleSelect}>
+              Select Location
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   )
 }

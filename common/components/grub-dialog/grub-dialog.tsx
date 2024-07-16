@@ -14,17 +14,10 @@ export const GrubDialog: FC<IGrubDialog> = ({ open, children, className, onClose
   const content = <div className={cls(styles.grubDialogContainer, className)}>{children}</div>
 
   return (
-    <Dialog
-      fullScreen={fullScreen}
-      open={open}
-      onClose={onClose}
-      aria-labelledby="grub-dialog-title"
-    >
+    <Dialog fullScreen={fullScreen} open={open} onClose={onClose} aria-labelledby="grub-dialog-title">
       <DialogTitle id="grub-dialog-title" className={styles.dialogTitle}>
         <div className={styles.dialogTitleContent}>
-          <div className={styles.dialogTitleText}>
-            {trimDialogTitle(title)}
-          </div>
+          <div className={styles.dialogTitleText}>{trimDialogTitle(title)}</div>
           <div className={styles.dialogTitleActions}>
             <Button onClick={onClose} variant="contained" color="secondary" className={styles.dialogActionButton}>
               Close
@@ -32,9 +25,7 @@ export const GrubDialog: FC<IGrubDialog> = ({ open, children, className, onClose
           </div>
         </div>
       </DialogTitle>
-      <DialogContent className={styles.dialogContent}>
-        {content}
-      </DialogContent>
+      <DialogContent className={styles.dialogContent}>{content}</DialogContent>
     </Dialog>
   )
 }

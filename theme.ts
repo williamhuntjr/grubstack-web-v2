@@ -13,11 +13,11 @@ const defaultTheme = createTheme({
   palette: {
     primary: {
       main: '#4e8ce1',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
     secondary: {
       main: '#111',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
   },
   typography: {

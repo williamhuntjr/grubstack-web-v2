@@ -14,7 +14,7 @@ import styles from './mobile-nav.module.scss'
 
 export const MobileNav: FC<IMobileNav> = ({ onOpenLocations }) => {
   return (
-    <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }} className={styles.mobileNavBar}>
+    <AppBar position="fixed" sx={{ top: 'auto', bottom: '60px' }} className={styles.mobileNavBar}>
       <Toolbar className={styles.mobileNavToolbar}>
         <IconButton aria-label="open drawer" className={styles.mobileNavButton}>
           <SearchIcon className={styles.navIcon} />

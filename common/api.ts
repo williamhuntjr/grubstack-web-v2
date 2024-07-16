@@ -12,7 +12,7 @@ export const callApi = async (endpoint: string, method: string, body?: RequestIn
     const params: globalThis.RequestInit = {
       method: method,
       body: body,
-      next: { revalidate: 60 }
+      next: { revalidate: 60 },
     }
 
     if (method == 'PUT' || method == 'POST') {

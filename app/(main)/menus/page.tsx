@@ -9,19 +9,26 @@ export const metadata: Metadata = {
 }
 
 function getRandomItem(data: IMenu[]) {
-  const items:IItem[] = []
+  let items: IItem[] = []
 
   data.forEach((menu) => {
-    menu.items?.forEach((item) => items.push(item))
+    menu.items?.forEach((item) =>
+      items.push({
+        ...item,
+        menu_id: menu.id,
+        menu_slug: menu.slug,
+      })
+    )
   })
 
-  var random = items[Math.floor(Math.random()*items.length)]
+  var random = items[Math.floor(Math.random() * items.length)]
   return random
 }
 
 export default async function Page() {
   const location = await getCurrentLocation()
   const menus = location ? await getLocationMenus(location.id) : []
+  const featuredItem = getRandomItem(menus)
 
-  return <Menus data={menus} featuredItem={getRandomItem(menus)}/>
+  return <Menus data={menus} featuredItem={featuredItem} locationId={location.id} />
 }
