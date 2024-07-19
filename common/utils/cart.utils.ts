@@ -1,13 +1,22 @@
 import { ICartState, ICartItem } from 'modules/cart/cart.types'
+import { ISelectorIngredient } from 'modules/cart/item-customizer/ingredient-selector/ingredient-selector.types'
 
 export function getPrice(item: ICartItem): number {
+  let price = 0
+
   if (item.is_onsale && item.sale_price) {
-    return item.sale_price
+    price = item.sale_price
   }
   if (item.price) {
-    return item.price
+    price = item.price
   }
-  return 0
+
+  item.ingredients.forEach((ingredient) => {
+    if (ingredient.cost > 0) {
+      price += ingredient.cost
+    }
+  })
+  return price
 }
 
 export function getQuantity(item: ICartItem): number {
@@ -33,4 +42,8 @@ export function generateQuantity(data: ICartState): number {
     quantity = quantity + getQuantity(item)
   })
   return quantity
+}
+
+export function instanceOfSelectorIngredient(data: any): data is ISelectorIngredient {
+  return 'state' in data
 }

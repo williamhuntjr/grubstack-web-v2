@@ -1,0 +1,42 @@
+@import 'assets/sass/variables';
+$itemCustomizerWidth: 500px;
+
+.itemCustomizerContainer {
+  width: 100%;
+  min-width: $itemCustomizerWidth;
+  @media screen and (max-width: $bp-sm) {
+    min-width: 300px;
+  }
+  .itemDetails {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    img {
+      width: 100%;
+      max-width: 150px;
+      margin: 0 auto 0 auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 0;
+    }
+    p {
+      margin-bottom: $grid-large;
+      text-align: center;
+    }
+  }
+  .buttonContainer {
+    display: flex;
+    @media screen and (max-width: $bp-xs) {
+      width: 100%;
+      padding-bottom: $grid-large;
+    }
+    .addButton {
+      margin-left: auto;
+      @media screen and (max-width: $bp-xs) {
+        margin-right: auto;
+        width: 100%;
+      }
+    }
+  }
+}

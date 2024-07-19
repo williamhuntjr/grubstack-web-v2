@@ -1,0 +1,53 @@
+@import 'assets/sass/variables';
+
+.ingredientSelectorContainer {
+  .ingredient {
+    display: flex;
+    align-items: center;
+    margin-bottom: $grid-small;
+    @media screen and (max-width: $bp-xs) {
+      flex-direction: column;
+      margin-bottom: $grid-large;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .ingredientDetails {
+      display: flex;
+      @media screen and (max-width: $bp-xs) {
+        flex-direction: column;
+        margin-bottom: $grid-small;
+      }
+      .name {
+        margin: 0;
+        padding: 0 $grid-tiny 0 $grid-tiny;
+      }
+      .thumbnail {
+        max-width: 25px;
+        height: auto;
+        margin-right: $grid-tiny;
+        @media screen and (max-width: $bp-xs) {
+          max-width: 50px;
+          margin-right: 0;
+          margin: auto;
+        }
+      }
+    }
+    .buttons {
+      height: 40px;
+      margin-left: auto;
+      @media screen and (max-width: $bp-xs) {
+        margin-right: auto;
+      }
+      .button {
+        padding: 5px 10px;
+        border-radius: 0px;
+        text-transform: uppercase;
+      }
+      .activeButton {
+        background-color: var(--primary-color);
+        color: var(--primary-color-contrast);
+      }
+    }
+  }
+}

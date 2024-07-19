@@ -18,6 +18,7 @@ import { ICartState } from 'modules/cart/cart.types'
 import { defaultCartState } from 'modules/cart/cart.constants'
 import { CartProvider } from 'common/hooks/cart.hook'
 import defaultTheme from 'theme'
+import { getCart } from 'modules/cart/cart.utils'
 import { Header } from './header/header'
 import { Footer } from './footer/footer'
 import { MobileNav } from './mobile-nav/mobile-nav'
@@ -145,20 +146,14 @@ export default function AppContainer({
     }
   }
 
-  const fetchCart = async (): Promise<void> => {
-    if (currentLocation) {
-      const resp = await fetch(`/api/locations/${currentLocation?.id!}/cart`)
-      const json = await resp.json()
-      setCart(json.data)
-    }
-  }
-
   const fetchData = async (): Promise<void> => {
     try {
       if (currentLocation) {
         setLoading(true)
         await fetchProperties()
-        await fetchCart()
+
+        const cartData = getCart(currentLocation.id!)
+        setCart(cartData)
         setLoading(false)
       }
     } catch (e) {

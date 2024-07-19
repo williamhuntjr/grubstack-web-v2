@@ -112,3 +112,9 @@ p {
 .MuiInput-root.MuiInput-underline {
   border: $border-disabled !important;
 }
+.MuiDialog-paper {
+  max-width: unset !important;
+}
+.MuiDialogContent-root {
+  scrollbar-width: thin;
+}

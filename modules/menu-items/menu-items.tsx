@@ -16,7 +16,10 @@ export const MenuItems: FC<IMenuItems> = ({ data }) => {
       {!data && (
         <div className={styles.warningContainer}>
           <h1>This menu does not exist</h1>
-          <p>It seems the menu you are attempting to access does not exist. Please check your URL and try again.</p>
+          <p>
+            It seems the menu you are attempting to access does not exist for this location. Please check your URL or location and try
+            again.
+          </p>
           <Button variant="contained" size="large" color="primary" onClick={() => router.push(menusRoutePath)}>
             View Menus
           </Button>

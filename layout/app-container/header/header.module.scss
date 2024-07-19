@@ -35,9 +35,11 @@ $searchInputHeight: 50px;
     .logo {
       margin: 0 $grid-large 0 $grid-large;
       img {
-        min-width: 80px;
-        width: 100%;
+        display: block;
+        width: auto;
+        height: auto;
         max-height: $header-height;
+        max-width: 120px;
       }
     }
     .divider {
