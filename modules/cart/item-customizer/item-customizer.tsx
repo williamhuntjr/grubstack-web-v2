@@ -3,61 +3,18 @@
 import React, { FC, useEffect, useState } from 'react'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
-import { IItem, IIngredient } from 'common/types'
-import { instanceOfSelectorIngredient } from 'common/utils/cart.utils'
+import { formatItem } from '../cart.utils'
 import { IngredientSelector } from './ingredient-selector/ingredient-selector'
 import { IItemCustomizer } from './item-customizer.types'
 import { ISelectorIngredient } from './ingredient-selector/ingredient-selector.types'
 import styles from './item-customizer.module.scss'
-import { IngredientState } from './ingredient-selector/ingredient-selector.constants'
 import { ICartItem } from '../cart.types'
 
 export const ItemCustomizer: FC<IItemCustomizer> = ({ data, onAddItemToCart, quantity, buttonLabel }) => {
   const [cartItem, setCartItem] = useState<ICartItem>()
 
-  const formatIngredients = (ingredients: IIngredient[] | ISelectorIngredient[]): ISelectorIngredient[] => {
-    return ingredients.map((ingredient) => {
-      let disabled = []
-
-      if (ingredient.is_optional && !ingredient.is_addon && !ingredient.is_extra) {
-        disabled.push(IngredientState.Extra)
-      }
-
-      if (instanceOfSelectorIngredient(ingredient)) {
-        return ingredient
-      }
-
-      return {
-        ...ingredient,
-        state: ingredient.is_addon ? IngredientState.None : IngredientState.Regular,
-        disabled: disabled,
-        cost: 0,
-      }
-    })
-  }
-
-  const formatItem = (cartItem: IItem): ICartItem => {
-    const formattedItem: ICartItem = {
-      id: cartItem.id ?? '',
-      name: cartItem.name,
-      description: cartItem.description,
-      slug: cartItem.slug,
-      thumbnail_url: cartItem.thumbnail_url,
-      price: cartItem.price ?? 0,
-      sale_price: cartItem.sale_price ?? 0,
-      is_onsale: cartItem.is_onsale ?? false,
-      menu_id: cartItem.menu_id ?? '',
-      menu_slug: cartItem.menu_slug ?? '',
-      quantity: quantity ?? 1,
-      ingredients: formatIngredients(cartItem.ingredients ?? []) ?? [],
-      varieties: cartItem.varieties ?? [],
-    }
-
-    return formattedItem
-  }
-
   const init = () => {
-    setCartItem(formatItem(data))
+    setCartItem(formatItem(data, quantity ?? 1))
   }
 
   const handleUpdateIngredients = (ingredients: ISelectorIngredient[]) => {

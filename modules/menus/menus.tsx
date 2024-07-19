@@ -12,7 +12,12 @@ import { IMenu } from 'common/types'
 import { GrubDialog } from 'common/components/grub-dialog/grub-dialog'
 import { ICartItem } from 'modules/cart/cart.types'
 import { ItemCustomizer } from 'modules/cart/item-customizer/item-customizer'
-import { getCart, addToCart } from 'modules/cart/cart.utils'
+import {
+  getCart,
+  addToCart,
+  checkItemForOptionalIngredients,
+  formatItem
+} from 'modules/cart/cart.utils'
 import { menusRoutePath } from './menus.constants'
 import { IMenus } from './menus.types'
 import styles from './menus.module.scss'
@@ -39,7 +44,7 @@ export const Menus: FC<IMenus> = ({ data, featuredItem, locationId }) => {
     }
   }
 
-  const handleAddClick = async (cartItem: ICartItem): Promise<void> => {
+  const handleAddItemToCart = async (cartItem: ICartItem): Promise<void> => {
     try {
       addToCart(cartItem, locationId)
       refreshCart()
@@ -62,12 +67,21 @@ export const Menus: FC<IMenus> = ({ data, featuredItem, locationId }) => {
     setMenus(menusList)
   }
 
+  const handleAddClick = (item: ICartItem) => {
+    if (checkItemForOptionalIngredients(item)) {
+      openItemCustomizer(item)
+    }
+    else {
+      handleAddItemToCart(item)
+    }
+  }
+
   useEffect(() => init(), [])
 
   return (
     <>
       <GrubDialog open={itemCustomizerOpen} onClose={closeItemCustomizer} title={'Customize Item'}>
-        <ItemCustomizer data={itemCustomizerData} onAddItemToCart={(cartItem: ICartItem) => handleAddClick(cartItem)} />
+        <ItemCustomizer data={itemCustomizerData} onAddItemToCart={(cartItem: ICartItem) => handleAddItemToCart(cartItem)} />
       </GrubDialog>
       {featuredItem && (
         <div className={styles.featuredItemContainer}>
@@ -81,7 +95,7 @@ export const Menus: FC<IMenus> = ({ data, featuredItem, locationId }) => {
                 <h3>{featuredItem.name}</h3>
                 <p>{featuredItem.description}</p>
                 <div className={styles.buttonContainer}>
-                  <Button variant="contained" color="primary" size="large" onClick={() => openItemCustomizer(featuredItem)}>
+                  <Button variant="contained" color="primary" size="large" onClick={() => handleAddClick(formatItem(featuredItem, 1))}>
                     Add to Cart
                   </Button>
                   <Button

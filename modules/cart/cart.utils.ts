@@ -1,8 +1,58 @@
 'use client'
 
 import { nanoid } from 'nanoid'
+import { IItem, IIngredient } from 'common/types'
+import { ISelectorIngredient } from './item-customizer/ingredient-selector/ingredient-selector.types'
+import { IngredientState } from './item-customizer/ingredient-selector/ingredient-selector.constants'
 import { defaultCartState } from './cart.constants'
 import { ICartItem, ICartState } from './cart.types'
+
+export function getPrice(item: ICartItem): number {
+  let price = 0
+
+  if (item.is_onsale && item.sale_price) {
+    price = item.sale_price
+  }
+  if (item.price) {
+    price = item.price
+  }
+
+  item.ingredients.forEach((ingredient) => {
+    if (ingredient.cost > 0) {
+      price += ingredient.cost
+    }
+  })
+  return price
+}
+
+export function getQuantity(item: ICartItem): number {
+  if (item.quantity) {
+    return item.quantity
+  }
+  return 1
+}
+
+export function generatePrice(data: ICartState): number {
+  let price = 0
+
+  data.items.forEach((item) => {
+    price = price + getPrice(item) * getQuantity(item)
+  })
+  return price
+}
+
+export function generateQuantity(data: ICartState): number {
+  let quantity = 0
+
+  data.items.forEach((item) => {
+    quantity = quantity + getQuantity(item)
+  })
+  return quantity
+}
+
+export function instanceOfSelectorIngredient(data: any): data is ISelectorIngredient {
+  return 'state' in data
+}
 
 export function getCart(locationId: string): ICartState {
   const localStorageData = localStorage.getItem(`cart-${locationId}`)
@@ -71,19 +121,25 @@ export async function emptyCart(locationId: string) {
 
 export async function updateItem(locationId: string, itemId: string, cartItem: ICartItem) {
   let addedToCart = false
+  let updatedId = undefined
 
   const parsedCart = getCart(locationId)
   let finalCart = { ...parsedCart }
 
   parsedCart.items.forEach((item: ICartItem, index: number) => {
     if (JSON.stringify({ ...item, id: '', quantity: 0 }) == JSON.stringify({ ...cartItem, id: '', quantity: 0 }) && !addedToCart) {
-      finalCart.items[index].quantity += cartItem.quantity
+      if (item.id != itemId) { finalCart.items[index].quantity += cartItem.quantity }
       addedToCart = true
+      updatedId = finalCart.items[index].id
     }
   })
 
   if (addedToCart) {
-    finalCart = { ...parsedCart, items: finalCart.items.filter((item) => item.id != itemId) }
+    if (updatedId != itemId) {
+      finalCart = { ...parsedCart, items: finalCart.items.filter((item) => item.id != itemId) }
+    } else {
+      finalCart = { ...parsedCart, items: finalCart.items }
+    }
   } else {
     const newItems = parsedCart.items.map((item) => {
       if (item.id == itemId) {
@@ -97,4 +153,57 @@ export async function updateItem(locationId: string, itemId: string, cartItem: I
   }
 
   setCart(locationId, finalCart)
+}
+
+export function checkItemForOptionalIngredients(cartItem: IItem): boolean {
+  let hasOptions:boolean = false
+  cartItem.ingredients?.forEach((ingredient) => {
+    if (ingredient.is_optional || ingredient.is_addon || ingredient.is_extra) {
+      hasOptions = true
+    }
+  })
+  
+  return hasOptions
+}
+
+
+export function formatIngredients(ingredients: IIngredient[] | ISelectorIngredient[]): ISelectorIngredient[] {
+  return ingredients.map((ingredient) => {
+    let disabled = []
+
+    if (ingredient.is_optional && !ingredient.is_addon && !ingredient.is_extra) {
+      disabled.push(IngredientState.Extra)
+    }
+
+    if (instanceOfSelectorIngredient(ingredient)) {
+      return ingredient
+    }
+
+    return {
+      ...ingredient,
+      state: ingredient.is_addon ? IngredientState.None : IngredientState.Regular,
+      disabled: disabled,
+      cost: 0,
+    }
+  })
+}
+
+export function formatItem(cartItem: IItem, quantity: number): ICartItem {
+  const formattedItem: ICartItem = {
+    id: cartItem.id ?? '',
+    name: cartItem.name,
+    description: cartItem.description,
+    slug: cartItem.slug,
+    thumbnail_url: cartItem.thumbnail_url,
+    price: cartItem.price ?? 0,
+    sale_price: cartItem.sale_price ?? 0,
+    is_onsale: cartItem.is_onsale ?? false,
+    menu_id: cartItem.menu_id ?? '',
+    menu_slug: cartItem.menu_slug ?? '',
+    quantity: quantity ?? 1,
+    ingredients: formatIngredients(cartItem.ingredients ?? []) ?? [],
+    varieties: cartItem.varieties ?? [],
+  }
+
+  return formattedItem
 }

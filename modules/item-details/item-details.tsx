@@ -12,7 +12,7 @@ import { GrubDialog } from 'common/components/grub-dialog/grub-dialog'
 import { ItemCustomizer } from 'modules/cart/item-customizer/item-customizer'
 import { menusRoutePath } from 'modules/menus/menus.constants'
 import { ICartItem } from 'modules/cart/cart.types'
-import { getCart, addToCart } from 'modules/cart/cart.utils'
+import { getCart, addToCart, checkItemForOptionalIngredients, formatItem } from 'modules/cart/cart.utils'
 import { IItemDetails } from './item-details.types'
 import styles from './item-details.module.scss'
 
@@ -38,7 +38,7 @@ export const ItemDetails: FC<IItemDetails> = ({ data, menu, locationId }) => {
     }
   }
 
-  const handleAddClick = async (cartItem: ICartItem): Promise<void> => {
+  const handleAddItemToCart = (cartItem: ICartItem): void => {
     try {
       addToCart(cartItem, locationId)
       refreshCart()
@@ -49,10 +49,23 @@ export const ItemDetails: FC<IItemDetails> = ({ data, menu, locationId }) => {
     }
   }
 
+  const handleAddClick = (item: IItem) => {
+    if (checkItemForOptionalIngredients(item)) {
+      openItemCustomizer({
+        ...item,
+        menu_id: menu!.id,
+        menu_slug: menu!.slug,
+      })
+    }
+    else {
+      handleAddItemToCart(formatItem(item, quantity ?? 1))
+    }
+  }
+
   return (
     <>
       <GrubDialog open={itemCustomizerOpen} onClose={closeItemCustomizer} title={'Customize Item'}>
-        <ItemCustomizer data={itemCustomizerData} onAddItemToCart={(cartItem: ICartItem) => handleAddClick(cartItem)} quantity={quantity} />
+        <ItemCustomizer data={itemCustomizerData} onAddItemToCart={(cartItem: ICartItem) => handleAddItemToCart(cartItem)} quantity={quantity} />
       </GrubDialog>
       <div className={styles.itemDetailsContainer}>
         {data && menu && (
@@ -69,7 +82,7 @@ export const ItemDetails: FC<IItemDetails> = ({ data, menu, locationId }) => {
                 color="primary"
                 size="large"
                 onClick={() =>
-                  openItemCustomizer({
+                  handleAddClick({
                     ...data,
                     menu_id: menu.id,
                     menu_slug: menu.slug,

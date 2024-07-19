@@ -7,14 +7,22 @@ import Chip from '@mui/material/Chip'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import { showDecimal } from 'common/utils/number.utils'
-import { getPrice, generatePrice } from 'common/utils/cart.utils'
 import { NumberInput } from 'common/components/number-input/number-input'
 import { useCart } from 'common/hooks/cart.hook'
 import { Loading } from 'common/components/loading/loading'
 import { menusRoutePath } from 'modules/menus/menus.constants'
 import { useDialog } from 'common/hooks/dialog.hook'
 import { GrubDialog } from 'common/components/grub-dialog/grub-dialog'
-import { getCart, updateQuantity, removeFromCart, emptyCart, updateItem } from './cart.utils'
+import { 
+  getCart,
+  updateQuantity,
+  removeFromCart,
+  emptyCart,
+  updateItem,
+  checkItemForOptionalIngredients,
+  getPrice,
+  generatePrice
+} from './cart.utils'
 import { ICart, ICartItem } from './cart.types'
 import { defaultCartState, defaultCartItem } from './cart.constants'
 import { IngredientState } from './item-customizer/ingredient-selector/ingredient-selector.constants'
@@ -43,7 +51,7 @@ export const Cart: FC<ICart> = ({ locationId }) => {
     data: itemCustomizerData,
   } = useDialog<ICartItem>(defaultCartItem)
 
-  const handleAddClick = async (cartItem: ICartItem): Promise<void> => {
+  const handleUpdateClick = async (cartItem: ICartItem): Promise<void> => {
     try {
       updateItem(locationId, cartItem.id, cartItem)
       refreshCart()
@@ -149,7 +157,7 @@ export const Cart: FC<ICart> = ({ locationId }) => {
       <GrubDialog open={itemCustomizerOpen} onClose={closeItemCustomizer} title={'Customize Item'}>
         <ItemCustomizer
           data={itemCustomizerData}
-          onAddItemToCart={(cartItem: ICartItem) => handleAddClick(cartItem)}
+          onAddItemToCart={(cartItem: ICartItem) => handleUpdateClick(cartItem)}
           quantity={itemCustomizerData.quantity ?? 1}
           buttonLabel={'Update Item'}
         />
@@ -183,9 +191,11 @@ export const Cart: FC<ICart> = ({ locationId }) => {
                         />
                       </div>
                       <div className={styles.buttonContainer}>
+                        {checkItemForOptionalIngredients(item) &&
                         <Button variant="contained" color="primary" size="large" onClick={() => openItemCustomizer(item)}>
                           Customize
                         </Button>
+                        }
                         <Button variant="contained" color="secondary" size="large" onClick={() => handleRemoveItem(item.id)}>
                           Remove
                         </Button>
