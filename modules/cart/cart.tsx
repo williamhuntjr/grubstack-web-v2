@@ -213,7 +213,7 @@ export const Cart: FC<ICart> = ({ locationId }) => {
                 </div>
                 <Divider />
                 <Button variant="contained" color="primary" className={styles.checkoutButton}>
-                  Proceed to Checkout
+                  Checkout
                 </Button>
                 <Button variant="contained" color="secondary" className={styles.checkoutButton} onClick={() => router.push(menusRoutePath)}>
                   Back to Menus
