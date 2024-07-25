@@ -7,8 +7,22 @@
   display: flex;
   flex-direction: column;
   padding-top: $header-height;
-  min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  min-height: calc(100vh - #{$header-height});
   background-color: $background-color;
+  @media screen and (max-width: $bp-sm) {
+    min-height: calc(100vh - #{$header-tablet-height} - #{$footer-height});
+    padding-top: $header-tablet-height;
+  }
+  @media screen and (max-width: $bp-xs) {
+    min-height: calc(100vh - #{$header-height} - #{$mobile-nav-height} - #{$footer-height});
+    padding-bottom: calc(#{$mobile-nav-height} + #{$footer-height});
+    padding-top: $header-height;
+  }
+}
+
+.hasFixedFooter {
+  padding-bottom: $footer-height;
+  min-height: calc(100vh - #{$header-height} - #{$footer-height});
   @media screen and (max-width: $bp-sm) {
     min-height: calc(100vh - #{$header-tablet-height} - #{$footer-height});
     padding-top: $header-tablet-height;

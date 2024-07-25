@@ -1,12 +1,14 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Theme } from '@emotion/react'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import { ThemeProvider } from '@mui/system'
+import { cls } from 'common/utils/utils'
 import { LocationForm } from 'common/forms/location-form/location-form'
 import { useDialog } from 'common/hooks/dialog.hook'
 import { GrubDialog } from 'common/components/grub-dialog/grub-dialog'
@@ -36,6 +38,9 @@ export default function AppContainer({
   const [cart, setCart] = useState<ICartState>(defaultCartState)
 
   const router = useRouter()
+  const pathname = usePathname()
+
+  const isHomepage = pathname == '/' ? true : false
 
   const {
     open: locationDialogOpen,
@@ -194,9 +199,9 @@ export default function AppContainer({
             <>
               <CartProvider initialValue={cart}>
                 <Header onOpenLocations={toggleLocationDialog} properties={properties} />
-                <main className={styles.appContainer}>{children}</main>
+                <main className={cls(styles.appContainer, !isHomepage ? styles.hasFixedFooter : '')}>{children}</main>
                 <MobileNav onOpenLocations={toggleLocationDialog} />
-                <Footer />
+                <Footer isHomepage={isHomepage} />
               </CartProvider>
             </>
           </ThemeProvider>

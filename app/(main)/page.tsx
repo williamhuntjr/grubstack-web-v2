@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getCurrentLocation } from 'common/actions/locations'
 import { getLocationProperties } from 'common/actions/locations'
 import { Homepage } from 'modules/homepage/homepage'
+import { IProperty } from 'common/types'
 
 export const metadata: Metadata = {
   title: 'GrubStack',
@@ -9,7 +10,13 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
+  let properties:IProperty[]|null = []
+
   const location = await getCurrentLocation()
-  const properties = await getLocationProperties(location.id)
+
+  if (location) {
+    properties = await getLocationProperties(location.id)
+  }
+
   return <Homepage properties={properties ?? []} />
 }
