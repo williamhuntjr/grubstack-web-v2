@@ -18,7 +18,7 @@
     width: 100%;
     max-width: $container-width;
     margin: $grid-base auto 0 auto;
-    padding: 0;
+    padding: 0 0 $grid-base 0;
     p {
       font-family: var(--font-open-sans);
     }

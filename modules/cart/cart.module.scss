@@ -224,13 +224,18 @@ $thumbnailSize: 50px;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  @media screen and (max-width: $bp-xs) {
+  @media screen and (max-width: $bp-sm) {
     justify-content: center;
+  }
+  @media screen and (max-width: $bp-xs) {
     margin-top: $grid-base;
   }
   li {
     list-style-type: none;
     margin-right: $grid-tiny;
     margin-bottom: $grid-tiny;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
