@@ -1,7 +1,7 @@
 'use client'
 
 import React, { FC, useEffect, useState } from 'react'
-import { CreditCard, PaymentForm } from 'react-square-web-payments-sdk' // @ts-ignore
+import { CreditCard, PaymentForm } from 'react-square-web-payments-sdk'
 import { useRouter } from 'next/navigation'
 import { ILocation } from 'common/types'
 import { appConfig } from 'common/config'
