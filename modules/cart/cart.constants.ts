@@ -1,5 +1,13 @@
+export const cartRoutePath = '/cart'
+
+export enum OrderType {
+  Pickup = 'Pick-up',
+  Delivery = 'Delivery'
+}
+
 export const defaultCartState = {
   items: [],
+  order_type: null,
 }
 
 export const defaultCartItem = {
@@ -10,6 +18,7 @@ export const defaultCartItem = {
   quantity: 1,
   price: 0,
   thumbnail_url: '',
+  item_id: '',
   menu_id: '',
   menu_slug: '',
   sale_price: 0,

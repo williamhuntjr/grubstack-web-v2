@@ -3,7 +3,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
-import Chip from '@mui/material/Chip'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import { showDecimal } from 'common/utils/number.utils'
@@ -13,6 +12,7 @@ import { Loading } from 'common/components/loading/loading'
 import { menusRoutePath } from 'modules/menus/menus.constants'
 import { useDialog } from 'common/hooks/dialog.hook'
 import { GrubDialog } from 'common/components/grub-dialog/grub-dialog'
+import { checkoutRoutePath } from 'modules/checkout/checkout.constants'
 import { 
   getCart,
   updateQuantity,
@@ -21,13 +21,14 @@ import {
   updateItem,
   checkItemForOptionalIngredients,
   getPrice,
-  generatePrice
+  generatePrice,
+  generateChips
 } from './cart.utils'
 import { ICart, ICartItem } from './cart.types'
 import { defaultCartState, defaultCartItem } from './cart.constants'
-import { IngredientState } from './item-customizer/ingredient-selector/ingredient-selector.constants'
 import { ItemCustomizer } from './item-customizer/item-customizer'
 import styles from './cart.module.scss'
+import { OrderTypePicker } from './order-type-picker/order-type-picker'
 
 export const Cart: FC<ICart> = ({ locationId }) => {
   const [isLoading, setLoading] = useState<boolean>(false)
@@ -88,63 +89,6 @@ export const Cart: FC<ICart> = ({ locationId }) => {
       }
     )
     setLoading(false)
-  }
-
-  const generateChips = (item: ICartItem) => {
-    return (
-      <ul className={styles.chipList}>
-        {item.ingredients.map((ingredient, index) => {
-          if (ingredient.is_optional || ingredient.is_extra || ingredient.is_addon) {
-            if (ingredient.is_extra) {
-              if (ingredient.state == IngredientState.Extra) {
-                return (
-                  <li key={`chip-${index}`}>
-                    <Chip color="secondary" label={`Extra ${ingredient.name}`} />
-                  </li>
-                )
-              }
-            }
-
-            if (ingredient.is_optional && ingredient.is_extra && !ingredient.is_addon) {
-              if (ingredient.state == IngredientState.None) {
-                return (
-                  <li key={`chip-${index}`}>
-                    <Chip color="secondary" label={`No ${ingredient.name}`} />
-                  </li>
-                )
-              }
-            }
-
-            if (ingredient.is_addon && ingredient.state != IngredientState.None) {
-              if (ingredient.state == IngredientState.Regular) {
-                return (
-                  <li key={`chip-${index}`}>
-                    <Chip color="secondary" label={`Add ${ingredient.name}`} />
-                  </li>
-                )
-              }
-              if (ingredient.state == IngredientState.Extra) {
-                return (
-                  <li key={`chip-${index}`}>
-                    <Chip color="secondary" label={`Extra ${ingredient.name}`} />
-                  </li>
-                )
-              }
-            }
-
-            if (ingredient.is_optional && !ingredient.is_extra && !ingredient.is_addon) {
-              if (ingredient.state == IngredientState.None) {
-                return (
-                  <li key={`chip-${index}`}>
-                    <Chip color="secondary" label={`No ${ingredient.name}`} />
-                  </li>
-                )
-              }
-            }
-          }
-        })}
-      </ul>
-    )
   }
 
   useEffect(() => {
@@ -212,13 +156,15 @@ export const Cart: FC<ICart> = ({ locationId }) => {
                   <h4 className={styles.subTotalPrice}>${cart ? showDecimal(generatePrice(cart)) : 0.0}</h4>
                 </div>
                 <Divider />
-                <Button variant="contained" color="primary" className={styles.checkoutButton}>
+                <OrderTypePicker locationId={locationId!} />
+                <Divider />
+                <Button variant="contained" color="primary" className={styles.checkoutButton} onClick={() => router.push(checkoutRoutePath)}>
                   Checkout
                 </Button>
-                <Button variant="contained" color="secondary" className={styles.checkoutButton} onClick={() => router.push(menusRoutePath)}>
+                <Button variant="contained" color="secondary" className={styles.menusButton} onClick={() => router.push(menusRoutePath)}>
                   Back to Menus
                 </Button>
-                <Button variant="outlined" color="primary" className={styles.checkoutButton} onClick={() => void handleEmptyCart()}>
+                <Button variant="outlined" color="primary" className={styles.emptyCartButton} onClick={() => void handleEmptyCart()}>
                   Empty My Cart
                 </Button>
               </div>

@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { Loading } from 'common/components/loading/loading'
 import { ILocation } from 'common/types'
+import { getActiveLocations } from 'common/actions/locations'
 import { ILocationForm } from './location-form.types'
 import styles from './location-form.module.scss'
 
@@ -23,9 +24,8 @@ export const LocationForm: FC<ILocationForm> = ({ onSelect, location }) => {
 
   const init = async () => {
     setLoading(true)
-    const resp = await fetch('/api/locations/active-locations')
-    const data = await resp.json()
-    setLocations(data ?? [])
+    const locations = await getActiveLocations() ?? []
+    setLocations(locations)
     if (location) {
       setCurrentLocation(location.id!)
     }

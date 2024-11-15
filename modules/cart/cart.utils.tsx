@@ -1,11 +1,13 @@
 'use client'
 
 import { nanoid } from 'nanoid'
+import Chip from '@mui/material/Chip'
 import { IItem, IIngredient } from 'common/types'
 import { ISelectorIngredient } from './item-customizer/ingredient-selector/ingredient-selector.types'
 import { IngredientState } from './item-customizer/ingredient-selector/ingredient-selector.constants'
 import { defaultCartState } from './cart.constants'
 import { ICartItem, ICartState } from './cart.types'
+import styles from './cart.module.scss'
 
 export function getPrice(item: ICartItem): number {
   let price = 0
@@ -67,6 +69,7 @@ export function setCart(locationId: string, cart: ICartState) {
 }
 
 export function addToCart(item: ICartItem, locationId: string) {
+  item.item_id = item.id
   item.id = nanoid()
 
   const parsedCart = getCart(locationId)
@@ -166,10 +169,13 @@ export function checkItemForOptionalIngredients(cartItem: IItem): boolean {
   return hasOptions
 }
 
-
 export function formatIngredients(ingredients: IIngredient[] | ISelectorIngredient[]): ISelectorIngredient[] {
   return ingredients.map((ingredient) => {
     let disabled = []
+
+    if (!ingredient.is_optional) {
+      disabled.push(IngredientState.None)
+    }
 
     if (ingredient.is_optional && !ingredient.is_addon && !ingredient.is_extra) {
       disabled.push(IngredientState.Extra)
@@ -198,6 +204,7 @@ export function formatItem(cartItem: IItem, quantity: number): ICartItem {
     price: cartItem.price ?? 0,
     sale_price: cartItem.sale_price ?? 0,
     is_onsale: cartItem.is_onsale ?? false,
+    item_id: cartItem.item_id ?? '',
     menu_id: cartItem.menu_id ?? '',
     menu_slug: cartItem.menu_slug ?? '',
     quantity: quantity ?? 1,
@@ -206,4 +213,61 @@ export function formatItem(cartItem: IItem, quantity: number): ICartItem {
   }
 
   return formattedItem
+}
+
+export function generateChips(item: ICartItem): JSX.Element {
+  return (
+    <ul className={styles.chipList}>
+      {item.ingredients.map((ingredient, index) => {
+        if (ingredient.is_optional || ingredient.is_extra || ingredient.is_addon) {
+          if (ingredient.is_extra) {
+            if (ingredient.state == IngredientState.Extra) {
+              return (
+                <li key={`chip-${index}`}>
+                  <Chip color="secondary" label={`Extra ${ingredient.name}`} />
+                </li>
+              )
+            }
+          }
+
+          if (ingredient.is_optional && ingredient.is_extra && !ingredient.is_addon) {
+            if (ingredient.state == IngredientState.None) {
+              return (
+                <li key={`chip-${index}`}>
+                  <Chip color="secondary" label={`No ${ingredient.name}`} />
+                </li>
+              )
+            }
+          }
+
+          if (ingredient.is_addon && ingredient.state != IngredientState.None) {
+            if (ingredient.state == IngredientState.Regular) {
+              return (
+                <li key={`chip-${index}`}>
+                  <Chip color="secondary" label={`Add ${ingredient.name}`} />
+                </li>
+              )
+            }
+            if (ingredient.state == IngredientState.Extra) {
+              return (
+                <li key={`chip-${index}`}>
+                  <Chip color="secondary" label={`Extra ${ingredient.name}`} />
+                </li>
+              )
+            }
+          }
+
+          if (ingredient.is_optional && !ingredient.is_extra && !ingredient.is_addon) {
+            if (ingredient.state == IngredientState.None) {
+              return (
+                <li key={`chip-${index}`}>
+                  <Chip color="secondary" label={`No ${ingredient.name}`} />
+                </li>
+              )
+            }
+          }
+        }
+      })}
+    </ul>
+  )
 }

@@ -114,7 +114,7 @@ export const Menus: FC<IMenus> = ({ data, featuredItem, locationId }) => {
       )}
       {menus.length > 0 && (
         <div className={styles.menusList}>
-          <CardList title="Location Menus" route={menusRoutePath} data={menus} />
+          <CardList title="Featured Menus" route={menusRoutePath} data={menus} />
         </div>
       )}
       {menus.length <= 0 && (

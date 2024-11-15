@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getCurrentLocation } from 'common/actions/locations'
-import { Cart } from 'modules/cart/cart'
+import { Checkout } from 'modules/checkout/checkout'
 
 export const metadata: Metadata = {
   title: 'GrubStack',
@@ -10,5 +10,5 @@ export const metadata: Metadata = {
 export default async function Page() {
   const location = await getCurrentLocation()
 
-  return <Cart locationId={location?.id ?? ''} />
+  return <Checkout locationId={location?.id ?? ''} />
 }
