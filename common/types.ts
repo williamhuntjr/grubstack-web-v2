@@ -1,3 +1,5 @@
+import { OrderType } from 'modules/cart/cart.constants'
+
 export interface IIngredient {
   id?: string
   name: string
@@ -37,6 +39,7 @@ export interface IItem {
   price?: number
   sale_price?: number
   is_onsale?: boolean
+  item_id?: string
   menu_id?: string
   menu_slug?: string
 }
@@ -62,10 +65,17 @@ export interface ILocation {
   create_date?: string
   menus?: IMenu[]
   is_active: boolean
+  merchant_location_id?: string
 }
 
 export interface IProperty {
   id: string
   key: string
   value: string
+}
+
+export interface IOrderType {
+  id?: string
+  name: OrderType
+  description: string
 }

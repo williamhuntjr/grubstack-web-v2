@@ -61,9 +61,11 @@ $thumbnailSize: 50px;
           font-weight: 500;
         }
       }
-      .checkoutButton {
+      .checkoutButton, .menusButton, .emptyCartButton {
         width: 100%;
-        margin-top: $grid-base;
+      }
+      .menusButton, .emptyCartButton {
+        margin-top: $grid-small;
       }
     }
     .cartItemsList {

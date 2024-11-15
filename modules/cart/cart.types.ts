@@ -1,4 +1,5 @@
 import { IVariety } from 'common/types'
+import { OrderType } from './cart.constants'
 import { ISelectorIngredient } from './item-customizer/ingredient-selector/ingredient-selector.types'
 
 export interface ICartItem {
@@ -9,6 +10,7 @@ export interface ICartItem {
   quantity: number
   price: number
   thumbnail_url: string
+  item_id: string
   menu_id: string
   menu_slug: string
   sale_price: number
@@ -19,6 +21,7 @@ export interface ICartItem {
 
 export interface ICartState {
   items: ICartItem[]
+  order_type: OrderType|null
 }
 
 export interface ICart {

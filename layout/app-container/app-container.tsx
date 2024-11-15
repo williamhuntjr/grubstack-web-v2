@@ -25,6 +25,7 @@ import { Header } from './header/header'
 import { Footer } from './footer/footer'
 import { MobileNav } from './mobile-nav/mobile-nav'
 import styles from './app-container.module.scss'
+import { getLocationProperties } from 'common/actions/locations'
 
 export default function AppContainer({
   children,
@@ -141,12 +142,11 @@ export default function AppContainer({
 
   const fetchProperties = async (): Promise<void> => {
     if (currentLocation) {
-      const resp = await fetch(`/api/locations/${currentLocation?.id!}/properties`)
-      const json = await resp.json()
-      setProperties(json.data)
-      if (json.data.length > 0) {
-        setTheme(generateTheme(json.data))
-        applyCssVariableValues(json.data)
+      const properties = await getLocationProperties(currentLocation?.id!) ?? []
+      setProperties(properties)
+      if (properties.length > 0) {
+        setTheme(generateTheme(properties))
+        applyCssVariableValues(properties)
       }
     }
   }

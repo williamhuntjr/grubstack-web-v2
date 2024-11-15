@@ -1,0 +1,13 @@
+$paymentFormWidth: 600px;
+
+.checkoutContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  .paymentFormContainer {
+    margin: 0 auto 0 auto;
+    min-width: $paymentFormWidth;
+  }
+}
